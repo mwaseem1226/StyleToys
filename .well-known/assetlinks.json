@@ -1,1 +1,9 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "io.github.mwaseem1226.twa",
+        "sha256_cert_fingerprints": ["AE:8F:C2:29:F8:79:5E:C2:B0:E4:FD:83:68:60:70:A0:33:68:C8:A0:10:4C:AF:A0:68:4A:0E:E3:44:53:2A:0D"]
+      }
+    }]
 
