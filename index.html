@@ -235,10 +235,36 @@ body{padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
 #pd .vu .fi{width:100%;box-sizing:border-box;padding:11px;margin:6px 0 8px;border:1px solid var(--bd2);border-radius:10px;background:var(--in);color:var(--ink);font:inherit}
 #pd .dg{background:transparent;color:var(--red);border:1px solid var(--red)}
 #pd .ab{cursor:pointer}
+
+#hero{margin:12px 12px 2px}
+#hero .hs{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+#hero .hs::-webkit-scrollbar{display:none}
+#hero .hsl{flex:0 0 100%;scroll-snap-align:center;min-height:196px;border-radius:20px;position:relative;overflow:hidden;color:#fff;padding:22px 18px;display:flex;flex-direction:column;justify-content:center;cursor:pointer;border:0;text-align:left;box-sizing:border-box;box-shadow:0 6px 16px rgba(0,0,0,.18)}
+#hero .hsl::before{content:"";position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.12)}
+#hero .hsl::after{content:"";position:absolute;left:-40px;bottom:-70px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.08)}
+#hero .hsl small{position:relative;z-index:1;font-size:11px;font-weight:700;letter-spacing:2px;opacity:.85;text-transform:uppercase}
+#hero .hsl h2{position:relative;z-index:1;margin:6px 0 0;font:800 29px/1.08 system-ui,sans-serif;max-width:56%;text-shadow:0 2px 6px rgba(0,0,0,.2)}
+#hero .hsl p{position:relative;z-index:1;margin:8px 0 14px;opacity:.92;font-size:14px;max-width:56%}
+#hero .hsl .go2{position:relative;z-index:1;align-self:flex-start;background:#fff;color:#1f2d36;font-weight:800;border-radius:22px;padding:9px 17px;font-size:14px}
+#hero .pics{position:absolute;right:8px;top:50%;transform:translateY(-50%);width:44%;height:168px;z-index:1}
+#hero .pics i{position:absolute;width:92px;height:92px;border-radius:16px;background-color:#fff;background-position:center;background-size:contain;background-repeat:no-repeat;border:3px solid #fff;box-shadow:0 10px 20px rgba(0,0,0,.3)}
+#hero .pics i:nth-child(1){right:2px;top:0;transform:rotate(8deg)}
+#hero .pics i:nth-child(2){right:62px;top:46px;transform:rotate(-7deg);z-index:2}
+#hero .pics i:nth-child(3){right:6px;top:84px;transform:rotate(4deg);z-index:3}
+#hero .hdots{display:flex;justify-content:center;gap:6px;margin-top:10px}
+#hero .hdots b{width:7px;height:7px;border-radius:4px;background:var(--bd2);transition:all .3s}
+#hero .hdots b.on{width:24px;background:var(--ac)}
+#cfbar{margin:10px 12px 0;display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:9px 12px;font-size:14px;font-weight:600}
+#cfbar[hidden],#hero[hidden]{display:none}
+#cfbar button{border:0;background:var(--gold);color:var(--gt);font-weight:700;border-radius:16px;padding:7px 14px}
+#upb{position:fixed;left:12px;right:12px;bottom:calc(var(--nh) + 10px);z-index:60;background:var(--hd);color:#fff;border-radius:14px;padding:11px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px;font-weight:600;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+#upb[hidden]{display:none}
+#upb button{border:0;background:var(--gold);color:var(--gt);font-weight:800;border-radius:16px;padding:8px 16px}
 </style><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#1f2d36"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Style Toys"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png"></head><body>
 <div id="sp"><div class="sl"></div><div class="sb"><i></i></div><div class="pw"><small>POWERED BY</small><b>Muhammad Waseem</b></div></div>
 <header><div class="top"><b>STYLE <span>TOYS</span></b><input id="q" type="search" placeholder="Search items"><button id="fb" type="button" aria-label="Filter"><svg viewBox="0 0 24 24"><path d="M3.5 5h17l-6.5 7.6V19l-4 1.8v-8.2z"/></svg><em id="fbc" hidden></em></button></div><div class="strip"></div></header>
 <div id="flt" hidden><div class="at"><b>Filter &amp; Sort</b><span><button id="fx" class="ab sm ghost" type="button">Close</button></span></div><div class="aw"><label class="fl">Category</label><select id="cs" aria-label="Category"></select><label class="fl">Sort by</label><select id="fs"><option value="def">Default</option><option value="pa">Price: Low to High</option><option value="pd">Price: High to Low</option><option value="na">Name: A to Z</option><option value="sd">Stock: High to Low</option></select><label class="fl">Price range</label><div class="fr"><input id="fmin" type="number" inputmode="numeric" min="0" placeholder="Min price"><span>to</span><input id="fmax" type="number" inputmode="numeric" min="0" placeholder="Max price"></div><label class="ak2"><input id="fav2" type="checkbox"> Available stock only</label><button id="fshow" class="ab" type="button">Show items</button><button id="freset" class="ab ghost" type="button">Reset all</button></div></div>
+<div id="hero" hidden></div><div id="cfbar" hidden><span id="cft"></span><button id="cfx" type="button">Show all</button></div>
 <main id="g"></main><p id="none" hidden>No items found.</p>
 <div id="bar" hidden><div id="sum"></div><button id="vc">View Cart</button></div>
 <div id="lb" hidden><button id="lbx" aria-label="Close">×</button><img id="lbi" alt=""><div id="lbc"></div><div id="lbz"><button id="zo" aria-label="Zoom out">−</button><button id="zr">Reset</button><button id="zp" aria-label="Zoom in">+</button></div></div>
@@ -276,7 +302,7 @@ document.addEventListener("change",e=>{if(e.target.classList.contains("qi"))setQ
 document.addEventListener("focusin",e=>{if(e.target.classList&&e.target.classList.contains("qi"))e.target.select()});
 $("#vc").onclick=()=>{cartUI();$("#m").hidden=false};$("#cl").onclick=()=>$("#m").hidden=true;
 $("#m").onclick=e=>{if(e.target.id=="m")$("#m").hidden=true};
-function flt(){applySort();const t=$("#q").value.trim().toLowerCase();let n=0;document.querySelectorAll(".c").forEach(c=>{const s=(!t||c.dataset.s.includes(t))&&(cat=="All"||c.dataset.c==cat)&&(!favOn||FAV.includes(c.dataset.n))&&okF(c);c.style.display=s?"":"none";if(s)n++});$("#none").hidden=n>0;window.__vis=n;updFB()}
+function flt(){applySort();heroVis();const t=$("#q").value.trim().toLowerCase();let n=0;document.querySelectorAll(".c").forEach(c=>{const s=(!t||c.dataset.s.includes(t))&&(cat=="All"||c.dataset.c==cat)&&(!favOn||FAV.includes(c.dataset.n))&&okF(c);c.style.display=s?"":"none";if(s)n++});$("#none").hidden=n>0;window.__vis=n;updFB()}
 $("#q").oninput=flt;
 function msg(){const L=lines();return `*New Order – ${SH}*\nName: ${$("#nm").value.trim()}\nPhone: ${$("#ph").value.trim()}\n`+($("#nt").value.trim()?`Note: ${$("#nt").value.trim()}\n`:"")+"\n"+L.map((l,k)=>`${k+1}. Item # ${l.x.n} – ${l.x.d}\n    ${l.q} x Wholesale Price ${rs(l.x.p)} = ${rs(l.q*l.x.p)}`).join("\n")+`\n\n*Total: ${rs(total())}*`}
 function ok(){$("#err").style.color="";const e=!lines().length?"Your cart is empty.":"";$("#err").textContent=e;return!e}
@@ -460,7 +486,7 @@ nav.addEventListener("click",e=>{const b=e.target.closest("[data-t]");if(!b)retu
  else{favOn=(k=="fav");if(favOn&&!FAV.length)toast("Tap the heart on any item to add it to Favourites");favUI();flt();window.scrollTo({top:0})}
  syncTab()});
 document.addEventListener("click",()=>setTimeout(syncTab,60),true);syncTab();
-const PB='<div class="pb"><small>POWERED BY</small><b>Muhammad Waseem</b><div class="ver">App version 2026.10.31</div></div>';
+const PB='<div class="pb"><small>POWERED BY</small><b>Muhammad Waseem</b><div class="ver">App version 2026.11.02</div></div>';
 const hdr=(t,b)=>'<div class="at"><button class="ab sm ghost" data-go="'+(b||"home")+'">\u2039 Back</button><b>'+t+'</b><span style="width:64px"></span></div>';
 function moreHome(){more.innerHTML='<div class="at"><b>More</b></div><div class="aw"><div class="ml">'+(S?'<button class="mr" data-go="cust" type="button"><span>Saved Customers</span><i>\u203a</i></button>':'')+'<button class="mr" data-go="adm" type="button"><span>Admin'+(S?'<small>Logged in \u00b7 stock update</small>':'')+'</span><i>\u203a</i></button><button class="mr" data-go="about" type="button"><span>About</span><i>\u203a</i></button></div>'+PB+'</div>'}
 function moreAbout(){more.innerHTML=hdr("About")+'<div class="aw abt"><div class="sl2"></div><h2>Style Toys</h2>'+PB+'</div>'}
@@ -588,18 +614,18 @@ function dlStock(){const q=s=>'"'+String(s).replace(/"/g,'""')+'"',rows=["Item N
  a.href=URL.createObjectURL(b);a.download="stock-price-"+new Date().toISOString().slice(0,10)+".csv";document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1500)}
 /* ---- filter page ---- */
 let fSort="def",fMin=null,fMax=null,fAvail=false;
-function okF(c){const x=D[+c.dataset.i];if(x.hid)return false;if(fAvail&&x.q<MINQ)return false;if(fMin!=null&&(x.p||0)<fMin)return false;if(fMax!=null&&(x.p||0)>fMax)return false;return true}
+function okF(c){const x=D[+c.dataset.i];if(x.hid)return false;if(fNew){const ia=D.some(y=>y.add&&!y.hid);if(ia?!x.add:+c.dataset.i<D.length-24)return false}if(fAvail&&x.q<MINQ)return false;if(fMin!=null&&(x.p||0)<fMin)return false;if(fMax!=null&&(x.p||0)>fMax)return false;return true}
 function applySort(){const o=D.map((x,i)=>i),A=(a,b)=>a-b;
  if(fSort=="pa")o.sort((a,b)=>((D[a].p||1e9)-(D[b].p||1e9))||A(a,b));else if(fSort=="pd")o.sort((a,b)=>((D[b].p||-1)-(D[a].p||-1))||A(a,b));else if(fSort=="na")o.sort((a,b)=>D[a].d.localeCompare(D[b].d)||A(a,b));else if(fSort=="sd")o.sort((a,b)=>(D[b].q-D[a].q)||A(a,b));
  const r=[];o.forEach((i,k)=>{r[i]=k});document.querySelectorAll(".c").forEach((c,i)=>{c.style.order=r[i]})}
-function updFB(){const n=(cat!="All")+(fSort!="def")+(fMin!=null)+(fMax!=null)+fAvail,e=$("#fbc");if(e){e.hidden=!n;e.textContent=n}const s=$("#fshow");if(s)s.textContent="Show "+(window.__vis==null?D.length:window.__vis)+" items"}
+function updFB(){cfUI();const n=(cat!="All")+(fSort!="def")+(fMin!=null)+(fMax!=null)+fAvail,e=$("#fbc");if(e){e.hidden=!n;e.textContent=n}const s=$("#fshow");if(s)s.textContent="Show "+(window.__vis==null?D.length:window.__vis)+" items"}
 const fl=$("#flt");
 $("#fb").onclick=()=>{closeAll();fl.hidden=false;document.body.style.overflow="hidden";updFB();syncTab()};
 fl.addEventListener("input",e=>{const id=e.target.id;if(id=="fmin"||id=="fmax"){const v=e.target.value.trim(),n=v===""?null:Math.max(0,Math.floor(+v));if(id=="fmin")fMin=n;else fMax=n;flt()}});
 fl.addEventListener("change",e=>{const id=e.target.id;if(id=="fs"){fSort=e.target.value;flt()}else if(id=="fav2"){fAvail=e.target.checked;flt()}});
 fl.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;
  if(b.id=="fx"||b.id=="fshow"){fl.hidden=true;document.body.style.overflow="";window.scrollTo({top:0});syncTab()}
- else if(b.id=="freset"){cat="All";fSort="def";fMin=fMax=null;fAvail=false;$("#cs").value="All";$("#fs").value="def";$("#fmin").value="";$("#fmax").value="";$("#fav2").checked=false;flt()}});
+ else if(b.id=="freset"){cat="All";fNew=false;fSort="def";fMin=fMax=null;fAvail=false;$("#cs").value="All";$("#fs").value="def";$("#fmin").value="";$("#fmax").value="";$("#fav2").checked=false;flt()}});
 flt();
 
 /* ===== Products (add/delete/photo), Videos, Customer delete ===== */
@@ -616,7 +642,7 @@ function setImg(i,url,path){const x=D[i];x.i=url;x.imgp=path;const e=document.qu
 function applyHidden(hm,known){if(!known)return;let ch=false;D.forEach((x,i)=>{if(x.del)return;const h=!!hm[x.n];if(h!==!!x.hid){x.hid=h;ch=true;hideUI(i);if(h)delete cart[x.n]}});if(ch){save();bar();refreshCats();flt()}}
 async function loadProducts(){try{const r=await fetch(SBU+"/rest/v1/products?select=item_no,description,image_path&limit=5000",{headers:{apikey:SBK},cache:"no-store"});if(!r.ok)return false;const a=await r.json(),seen={};
  a.forEach(o=>{seen[o.item_no]=1;const url=o.image_path?IMG(o.image_path):"",i=idx(o.item_no);if(i<0)addProduct({n:o.item_no,d:o.description,img:url,p:o.image_path});else if(url&&D[i].i!==url)setImg(i,url,o.image_path)});
- D.forEach((x,i)=>{if(x.add&&!seen[x.n]&&!x.del){x.del=true;x.hid=true;hideUI(i);delete cart[x.n]}});SS("st_prod",a);refreshCats();flt();return true}catch(e){return false}}
+ D.forEach((x,i)=>{if(x.add&&!seen[x.n]&&!x.del){x.del=true;x.hid=true;hideUI(i);delete cart[x.n]}});SS("st_prod",a);refreshCats();buildHero();flt();return true}catch(e){return false}}
 async function loadStock(){try{await loadProducts();let r;for(const s of["item_no,qty,price,hidden","item_no,qty,price","item_no,qty"]){r=await fetch(SBU+"/rest/v1/stock?select="+s+"&limit=5000",{headers:{apikey:SBK},cache:"no-store"});if(r.ok)break}if(!r.ok)throw 0;
  const a=await r.json(),m={},pm={},hm={};a.forEach(o=>{m[o.item_no]=o.qty;if(o.price>0)pm[o.item_no]=o.price;if(o.hidden)hm[o.item_no]=1});lastLoad=Date.now();applyStock(m);applyPrice(pm);applyHidden(hm,a.some(o=>"hidden" in o));cacheSt(m);cachePr(pm);return true}catch(e){return false}}
 LS("st_prod",[]).forEach(o=>{if(idx(o.item_no)<0)addProduct({n:o.item_no,d:o.description,img:o.image_path?IMG(o.image_path):"",p:o.image_path})});
@@ -801,6 +827,45 @@ pdEl.addEventListener("click",async e=>{const b=e.target.closest("button, img");
    const t=await tok(),r=await fetch(SBU+"/rest/v1/videos",{method:"POST",headers:{apikey:SBK,Authorization:"Bearer "+t,"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify({item_no:x.n,title:title||null,video_path:path})});if(!r.ok){delFile("product-videos",path);throw new Error(await errT(r))}
    toast("Video uploaded");await pdVideos(x)}catch(err){b.disabled=false;pr.textContent=err.message}return}
  if(b.dataset.pvd){const v=PDV.find(z=>z.id==b.dataset.pvd);if(!v||!confirm("Delete this video?"))return;try{const t=await tok(),r=await fetch(SBU+"/rest/v1/videos?id=eq."+enc(v.id),{method:"DELETE",headers:{apikey:SBK,Authorization:"Bearer "+t,Prefer:"return=representation"}});if(!r.ok)throw new Error(await errT(r));const a=await r.json();if(!a.length)throw new Error("Not allowed - login again");delFile("product-videos",v.video_path);PDV=PDV.filter(z=>z.id!=v.id);toast("Video deleted");pdVidDraw()}catch(err){toast(err.message)}}});
+
+/* ===== Home banners (slides) ===== */
+var fNew=false;
+const HS=[
+ {k:"new",l:"Just in",t:"New Collection",g:"linear-gradient(135deg,#0b5d68,#14909e 55%,#6fd0db)"},
+ {k:"c",c:"R/C Toys",l:"Remote control",t:"R/C Cars",g:"linear-gradient(135deg,#7a1f2b,#d1344f)"},
+ {k:"c",c:"Blocks, Puzzles & Learning",l:"Learn while playing",t:"Educational Toys",g:"linear-gradient(135deg,#17356b,#4a86e8)"},
+ {k:"c",c:"Battery Operated",l:"Lights \u00b7 sound \u00b7 action",t:"Battery Operated Toys",g:"linear-gradient(135deg,#a85400,#f2a33a)"},
+ {k:"c",c:"Dolls, Makeup & Kitchen",l:"For little ones",t:"Dolls & Kitchen Sets",g:"linear-gradient(135deg,#6d2480,#d36bbf)"},
+ {k:"c",c:"Wooden & Slates",l:"Classic favourites",t:"Wooden Toys & Slates",g:"linear-gradient(135deg,#523317,#b8844a)"},
+ {k:"c",c:"Games & Sports",l:"Fun for everyone",t:"Games & Sports",g:"linear-gradient(135deg,#17653f,#59c58a)"},
+ {k:"c",c:"Heroes & Action Figures",l:"Hero collection",t:"Action Heroes",g:"linear-gradient(135deg,#1b2431,#51647f)"}];
+let heroTick=0;
+function buildHero(){const h=$("#hero");if(!h)return;const act=D.filter(x=>!x.hid),keep=h.querySelector(".hs");const sl=keep?keep.scrollLeft:0;
+ const hasNew=act.some(x=>x.add);
+ const html=HS.map((s,k)=>{let L=s.c?act.filter(x=>x.c==s.c):(hasNew?act.filter(x=>x.add):act.slice(-24));if(!L.length)return"";
+  const w=L.filter(x=>x.i&&x.q>=MINQ),n=w.length,pick=n?[0,1,2].map(j=>w[Math.floor((j+.5)*n/3)]).filter((x,j,a)=>x&&a.indexOf(x)==j):[];
+  return`<button class="hsl" type="button" data-k="${k}" style="background:${s.g}"><small>${esc(s.l)}</small><h2>${esc(s.t)}</h2><p>${s.c||hasNew?L.length+" items":"Latest arrivals"}</p><span class="go2">Shop now \u203a</span><div class="pics">${pick.map(x=>`<i style="background-image:url('${String(x.i).replace(/'/g,"%27")}')"></i>`).join("")}</div></button>`}).filter(Boolean);
+ h.innerHTML='<div class="hs">'+html.join("")+'</div><div class="hdots">'+html.map((_,i)=>'<b'+(i?"":' class="on"')+'></b>').join("")+'</div>';
+ const hs=h.querySelector(".hs");if(sl)hs.scrollLeft=sl;
+ hs.addEventListener("scroll",()=>{const i=Math.round(hs.scrollLeft/(hs.clientWidth+10));h.querySelectorAll(".hdots b").forEach((b,j)=>b.classList.toggle("on",j==i))},{passive:true});
+ ["touchstart","pointerdown","wheel"].forEach(ev=>hs.addEventListener(ev,()=>{heroTick=Date.now()},{passive:true}));heroVis()}
+function heroVis(){const h=$("#hero");if(!h)return;const q=($("#q").value||"").trim(),show=!q&&cat=="All"&&!favOn&&!fNew&&fSort=="def"&&fMin==null&&fMax==null&&!fAvail&&h.querySelector(".hsl");h.hidden=!show}
+function cfUI(){const b=$("#cfbar");if(!b)return;const on=(cat!="All"||fNew)&&!favOn;b.hidden=!on;if(on)$("#cft").textContent="Showing: "+(fNew?"New Collection":cat)+(window.__vis==null?"":" \u00b7 "+window.__vis+" items")}
+function heroGo(k){const s=HS[k];if(!s)return;if(s.k=="new"){fNew=true;cat="All";$("#cs").value="All"}else{fNew=false;cat=s.c;$("#cs").value=s.c}flt();window.scrollTo({top:0})}
+$("#hero").addEventListener("click",e=>{const b=e.target.closest(".hsl");if(b)heroGo(+b.dataset.k)});
+$("#cfx").addEventListener("click",()=>{cat="All";fNew=false;$("#cs").value="All";flt();window.scrollTo({top:0})});
+setInterval(()=>{const h=$("#hero");if(!h||h.hidden||document.hidden||document.getElementById("sp")||Date.now()-heroTick<7000)return;const hs=h.querySelector(".hs");if(!hs)return;const step=hs.clientWidth+10,n=hs.children.length,i=Math.round(hs.scrollLeft/step);hs.scrollTo({left:((i+1)%n)*step,behavior:"smooth"})},4000);
+buildHero();flt();
+
+/* ===== Update app (manual button + automatic new-version notice) ===== */
+const APPVER="2026.11.02";
+async function refreshApp(){toast("Updating...");try{const rs=await navigator.serviceWorker.getRegistrations();await Promise.all(rs.map(r=>r.unregister()));const ks=await caches.keys();await Promise.all(ks.map(k=>caches.delete(k)))}catch(e){}
+ const u=new URL(location.href);u.searchParams.set("u",Date.now());location.replace(u.toString())}
+function moreHome(){more.innerHTML='<div class="at"><b>More</b></div><div class="aw"><div class="ml">'+(S?'<button class="mr" data-go="cust" type="button"><span>Saved Customers</span><i>\u203a</i></button>':'')+'<button class="mr" data-go="adm" type="button"><span>Admin'+(S?'<small>Logged in \u00b7 stock update</small>':'')+'</span><i>\u203a</i></button><button class="mr" data-go="about" type="button"><span>About</span><i>\u203a</i></button><button class="mr" data-go="upd" type="button"><span>Update app<small>Get the latest version</small></span><i>\u203a</i></button></div>'+PB+'</div>'}
+more.addEventListener("click",e=>{if(e.target.closest('[data-go="upd"]'))refreshApp()});
+const upb=document.createElement("div");upb.id="upb";upb.hidden=true;upb.innerHTML='<span>New version available</span><button type="button">Update</button>';document.body.appendChild(upb);upb.querySelector("button").onclick=refreshApp;
+async function chkUpd(){try{const r=await fetch("version.json?t="+Date.now(),{cache:"no-store"});if(!r.ok)return;const j=await r.json();if(j&&j.v&&j.v!==APPVER)upb.hidden=false}catch(e){}}
+setTimeout(chkUpd,8000);document.addEventListener("visibilitychange",()=>{if(!document.hidden)chkUpd()});
 
 if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
 </script></body></html>
