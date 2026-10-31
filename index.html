@@ -486,7 +486,7 @@ nav.addEventListener("click",e=>{const b=e.target.closest("[data-t]");if(!b)retu
  else{favOn=(k=="fav");if(favOn&&!FAV.length)toast("Tap the heart on any item to add it to Favourites");favUI();flt();window.scrollTo({top:0})}
  syncTab()});
 document.addEventListener("click",()=>setTimeout(syncTab,60),true);syncTab();
-const PB='<div class="pb"><small>POWERED BY</small><b>Muhammad Waseem</b><div class="ver">App version 2026.11.02</div></div>';
+const PB='<div class="pb"><small>POWERED BY</small><b>Muhammad Waseem</b><div class="ver">App version 2026.11.03</div></div>';
 const hdr=(t,b)=>'<div class="at"><button class="ab sm ghost" data-go="'+(b||"home")+'">\u2039 Back</button><b>'+t+'</b><span style="width:64px"></span></div>';
 function moreHome(){more.innerHTML='<div class="at"><b>More</b></div><div class="aw"><div class="ml">'+(S?'<button class="mr" data-go="cust" type="button"><span>Saved Customers</span><i>\u203a</i></button>':'')+'<button class="mr" data-go="adm" type="button"><span>Admin'+(S?'<small>Logged in \u00b7 stock update</small>':'')+'</span><i>\u203a</i></button><button class="mr" data-go="about" type="button"><span>About</span><i>\u203a</i></button></div>'+PB+'</div>'}
 function moreAbout(){more.innerHTML=hdr("About")+'<div class="aw abt"><div class="sl2"></div><h2>Style Toys</h2>'+PB+'</div>'}
@@ -858,10 +858,10 @@ setInterval(()=>{const h=$("#hero");if(!h||h.hidden||document.hidden||document.g
 buildHero();flt();
 
 /* ===== Update app (manual button + automatic new-version notice) ===== */
-const APPVER="2026.11.02";
+const APPVER="2026.11.03";
 async function refreshApp(){toast("Updating...");try{const rs=await navigator.serviceWorker.getRegistrations();await Promise.all(rs.map(r=>r.unregister()));const ks=await caches.keys();await Promise.all(ks.map(k=>caches.delete(k)))}catch(e){}
  const u=new URL(location.href);u.searchParams.set("u",Date.now());location.replace(u.toString())}
-function moreHome(){more.innerHTML='<div class="at"><b>More</b></div><div class="aw"><div class="ml">'+(S?'<button class="mr" data-go="cust" type="button"><span>Saved Customers</span><i>\u203a</i></button>':'')+'<button class="mr" data-go="adm" type="button"><span>Admin'+(S?'<small>Logged in \u00b7 stock update</small>':'')+'</span><i>\u203a</i></button><button class="mr" data-go="about" type="button"><span>About</span><i>\u203a</i></button><button class="mr" data-go="upd" type="button"><span>Update app<small>Get the latest version</small></span><i>\u203a</i></button></div>'+PB+'</div>'}
+function moreHome(){more.innerHTML='<div class="at"><b>More</b></div><div class="aw"><div class="ml">'+(S?'<button class="mr" data-go="cust" type="button"><span>Saved Customers</span><i>\u203a</i></button>':'')+'<button class="mr" data-go="adm" type="button"><span>Admin'+(S?'<small>Logged in \u00b7 stock update</small>':'')+'</span><i>\u203a</i></button><button class="mr" data-go="about" type="button"><span>About</span><i>\u203a</i></button><button class="mr" data-go="upd" type="button"><span>Update app<small>Get the latest version</small></span><i>\u203a</i></button></div>'+PB+'</div>';const vv=more.querySelector(".ver");if(vv)vv.innerHTML+="<br>"+esc(location.host+location.pathname)}
 more.addEventListener("click",e=>{if(e.target.closest('[data-go="upd"]'))refreshApp()});
 const upb=document.createElement("div");upb.id="upb";upb.hidden=true;upb.innerHTML='<span>New version available</span><button type="button">Update</button>';document.body.appendChild(upb);upb.querySelector("button").onclick=refreshApp;
 async function chkUpd(){try{const r=await fetch("version.json?t="+Date.now(),{cache:"no-store"});if(!r.ok)return;const j=await r.json();if(j&&j.v&&j.v!==APPVER)upb.hidden=false}catch(e){}}
