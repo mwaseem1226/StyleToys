@@ -260,6 +260,26 @@ body{padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
 #upb{position:fixed;left:12px;right:12px;bottom:calc(var(--nh) + 10px);z-index:60;background:var(--hd);color:#fff;border-radius:14px;padding:11px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px;font-weight:600;box-shadow:0 6px 18px rgba(0,0,0,.35)}
 #upb[hidden]{display:none}
 #upb button{border:0;background:var(--gold);color:var(--gt);font-weight:800;border-radius:16px;padding:8px 16px}
+#xd{position:fixed;inset:0;z-index:95;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;padding:20px}
+#xd[hidden]{display:none}
+#xd .xb{background:var(--card);color:var(--ink);border-radius:18px;padding:22px 20px;width:100%;max-width:340px;text-align:center;box-shadow:0 12px 40px rgba(0,0,0,.4)}
+#xd h3{margin:0 0 8px;font-size:20px}#xd p{margin:0 0 18px;color:var(--mut)}
+#xd .xb div{display:flex;gap:10px}
+#xd button{flex:1;padding:13px;border-radius:12px;border:1px solid var(--bd2);background:transparent;color:var(--ink);font-weight:800;font-size:16px}
+#xd #xyes{background:var(--red);border-color:var(--red);color:#fff}
+#adm .bn{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:12px;margin:12px 0}
+#adm .bnh{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px}
+#adm .bnh label{font-size:14px;display:flex;align-items:center;gap:6px}
+#adm .bnh span{display:flex;gap:6px}
+#adm .bnh button{padding:6px 10px;border-radius:8px;border:1px solid var(--bd2);background:transparent;color:var(--ink);font-weight:700}
+#adm .bnh button.dg{color:var(--red);border-color:var(--red)}
+#adm .sw{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:6px}
+#adm .sw button{width:40px;height:40px;border-radius:50%;border:3px solid transparent;padding:0}
+#adm .sw button.on{border-color:var(--ink)}
+#adm .bp{display:flex;gap:8px}#adm .bpi{flex:1;text-align:center}
+#adm .bpi i{display:flex;align-items:center;justify-content:center;height:78px;border-radius:12px;background-color:#fff;background-position:center;background-size:contain;background-repeat:no-repeat;border:1px solid var(--bd);font-style:normal;font-size:12px;color:#8a949b}
+#adm .bpi button{width:100%;margin-top:4px;padding:7px;border-radius:8px;border:1px solid var(--bd2);background:transparent;color:var(--ink);font-size:12px;font-weight:700}
+#adm .bpi button.dg{color:var(--red);border-color:var(--red)}
 </style><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#1f2d36"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Style Toys"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png"></head><body>
 <div id="sp"><div class="sl"></div><div class="sb"><i></i></div><div class="pw"><small>POWERED BY</small><b>Muhammad Waseem</b></div></div>
 <header><div class="top"><b>STYLE <span>TOYS</span></b><input id="q" type="search" placeholder="Search items"><button id="fb" type="button" aria-label="Filter"><svg viewBox="0 0 24 24"><path d="M3.5 5h17l-6.5 7.6V19l-4 1.8v-8.2z"/></svg><em id="fbc" hidden></em></button></div><div class="strip"></div></header>
@@ -486,7 +506,7 @@ nav.addEventListener("click",e=>{const b=e.target.closest("[data-t]");if(!b)retu
  else{favOn=(k=="fav");if(favOn&&!FAV.length)toast("Tap the heart on any item to add it to Favourites");favUI();flt();window.scrollTo({top:0})}
  syncTab()});
 document.addEventListener("click",()=>setTimeout(syncTab,60),true);syncTab();
-const PB='<div class="pb"><small>POWERED BY</small><b>Muhammad Waseem</b><div class="ver">App version 2026.11.03</div></div>';
+const PB='<div class="pb"><small>POWERED BY</small><b>Muhammad Waseem</b><div class="ver">App version 2026.11.04</div></div>';
 const hdr=(t,b)=>'<div class="at"><button class="ab sm ghost" data-go="'+(b||"home")+'">\u2039 Back</button><b>'+t+'</b><span style="width:64px"></span></div>';
 function moreHome(){more.innerHTML='<div class="at"><b>More</b></div><div class="aw"><div class="ml">'+(S?'<button class="mr" data-go="cust" type="button"><span>Saved Customers</span><i>\u203a</i></button>':'')+'<button class="mr" data-go="adm" type="button"><span>Admin'+(S?'<small>Logged in \u00b7 stock update</small>':'')+'</span><i>\u203a</i></button><button class="mr" data-go="about" type="button"><span>About</span><i>\u203a</i></button></div>'+PB+'</div>'}
 function moreAbout(){more.innerHTML=hdr("About")+'<div class="aw abt"><div class="sl2"></div><h2>Style Toys</h2>'+PB+'</div>'}
@@ -656,7 +676,7 @@ const AH=t=>({apikey:SBK,Authorization:"Bearer "+t,"Content-Type":"application/j
 async function readSheet(f){const nm=f.name.toLowerCase();if(/\.xls[xm]$/.test(nm))return xlsxRows(await f.arrayBuffer());if(/\.xls$/.test(nm))throw new Error("Old .xls not supported. Save as .xlsx or .csv");return csvParse((await f.text()).replace(/^\uFEFF/,""))}
 /* ---- admin view (override) ---- */
 let showDel=false,PHN=null,BA=null;
-function admView(){adm.innerHTML='<div class="at"><b>Stock Update</b><span><button id="alo" class="ab sm ghost" type="button">Logout</button><button id="ax" class="ab sm ghost" type="button">Close</button></span></div><div class="aw"><div class="bk"><button id="aadd" class="ab" type="button">+ Add new product</button><button id="abadd" class="ab" type="button">Bulk add products (Excel / CSV)</button><button id="abp" class="ab" type="button">Bulk upload photos (ZIP file)</button><button id="abk" class="ab" type="button">Bulk update Stock &amp; Price (CSV / Excel)</button><button id="adl" class="ab ghost" type="button">Download stock &amp; price (CSV)</button>'
+function admView(){adm.innerHTML='<div class="at"><b>Stock Update</b><span><button id="alo" class="ab sm ghost" type="button">Logout</button><button id="ax" class="ab sm ghost" type="button">Close</button></span></div><div class="aw"><div class="bk"><button id="aadd" class="ab" type="button">+ Add new product</button><button id="abadd" class="ab" type="button">Bulk add products (Excel / CSV)</button><button id="abp" class="ab" type="button">Bulk upload photos (ZIP file)</button><button id="abn" class="ab" type="button">Edit home banners</button><button id="abk" class="ab" type="button">Bulk update Stock &amp; Price (CSV / Excel)</button><button id="adl" class="ab ghost" type="button">Download stock &amp; price (CSV)</button>'
  +'<input id="afile" type="file" accept=".csv,.txt,.xlsx,.xlsm,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" hidden><input id="afile2" type="file" accept=".csv,.txt,.xlsx,.xlsm,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" hidden><input id="aph" type="file" accept="image/*" hidden><input id="aphm" type="file" accept=".zip,application/zip,application/x-zip-compressed" hidden></div>'
  +'<input id="as" type="search" placeholder="Search item no. or name"><label class="ak"><input id="af" type="checkbox"> Out of stock only (below '+MINQ+')</label><label class="ak"><input id="ah" type="checkbox"> Show deleted items</label><div id="alist"></div></div>';drawList()}
 function drawList(){const t=$("#as").value.trim().toLowerCase(),o=$("#af").checked,sd=$("#ah")&&$("#ah").checked;let n=0,h="";
@@ -858,7 +878,7 @@ setInterval(()=>{const h=$("#hero");if(!h||h.hidden||document.hidden||document.g
 buildHero();flt();
 
 /* ===== Update app (manual button + automatic new-version notice) ===== */
-const APPVER="2026.11.03";
+const APPVER="2026.11.04";
 async function refreshApp(){toast("Updating...");try{const rs=await navigator.serviceWorker.getRegistrations();await Promise.all(rs.map(r=>r.unregister()));const ks=await caches.keys();await Promise.all(ks.map(k=>caches.delete(k)))}catch(e){}
  const u=new URL(location.href);u.searchParams.set("u",Date.now());location.replace(u.toString())}
 function moreHome(){more.innerHTML='<div class="at"><b>More</b></div><div class="aw"><div class="ml">'+(S?'<button class="mr" data-go="cust" type="button"><span>Saved Customers</span><i>\u203a</i></button>':'')+'<button class="mr" data-go="adm" type="button"><span>Admin'+(S?'<small>Logged in \u00b7 stock update</small>':'')+'</span><i>\u203a</i></button><button class="mr" data-go="about" type="button"><span>About</span><i>\u203a</i></button><button class="mr" data-go="upd" type="button"><span>Update app<small>Get the latest version</small></span><i>\u203a</i></button></div>'+PB+'</div>';const vv=more.querySelector(".ver");if(vv)vv.innerHTML+="<br>"+esc(location.host+location.pathname)}
@@ -866,6 +886,64 @@ more.addEventListener("click",e=>{if(e.target.closest('[data-go="upd"]'))refresh
 const upb=document.createElement("div");upb.id="upb";upb.hidden=true;upb.innerHTML='<span>New version available</span><button type="button">Update</button>';document.body.appendChild(upb);upb.querySelector("button").onclick=refreshApp;
 async function chkUpd(){try{const r=await fetch("version.json?t="+Date.now(),{cache:"no-store"});if(!r.ok)return;const j=await r.json();if(j&&j.v&&j.v!==APPVER)upb.hidden=false}catch(e){}}
 setTimeout(chkUpd,8000);document.addEventListener("visibilitychange",()=>{if(!document.hidden)chkUpd()});
+
+/* ===== Exit confirmation (installed app) ===== */
+const isApp=()=>!!window.__forceApp||matchMedia("(display-mode: standalone)").matches||matchMedia("(display-mode: fullscreen)").matches||matchMedia("(display-mode: minimal-ui)").matches||navigator.standalone===true||document.referrer.indexOf("android-app://")==0;
+let exiting=false;
+const xd=document.createElement("div");xd.id="xd";xd.hidden=true;xd.innerHTML='<div class="xb"><h3>Exit Style Toys?</h3><p>Are you sure you want to exit?</p><div><button id="xno" type="button">No</button><button id="xyes" type="button">Yes, exit</button></div></div>';document.body.appendChild(xd);
+const guard=()=>{try{history.pushState({sg:1},"")}catch(e){}};
+function anyOpen(){return!$("#lb").hidden||!$("#pd").hidden||!$("#m").hidden||!$("#flt").hidden||!adm.hidden||!more.hidden||!ov.hidden||($("#vid")&&!$("#vid").hidden)}
+if(isApp()){try{history.replaceState({sr:1},"");guard()}catch(e){}
+ window.addEventListener("popstate",e=>{if(exiting)return;if(!(e.state&&e.state.sr))return;
+  if(!xd.hidden){xd.hidden=true;guard();return}
+  if(!$("#lb").hidden){lbClose();guard();return}
+  if(anyOpen()){closeAll();syncTab();guard();return}
+  if(favOn){favOn=false;favUI();flt();syncTab();guard();return}
+  xd.hidden=false});
+ $("#xno").onclick=()=>{xd.hidden=true;guard()};
+ $("#xyes").onclick=()=>{exiting=true;xd.hidden=true;try{window.close()}catch(e){}setTimeout(()=>{toast("Press back once more to exit")},600)}}
+/* ===== Editable home banners ===== */
+const GR=["linear-gradient(135deg,#0b5d68,#14909e 55%,#6fd0db)","linear-gradient(135deg,#7a1f2b,#d1344f)","linear-gradient(135deg,#17356b,#4a86e8)","linear-gradient(135deg,#a85400,#f2a33a)","linear-gradient(135deg,#6d2480,#d36bbf)","linear-gradient(135deg,#523317,#b8844a)","linear-gradient(135deg,#17653f,#59c58a)","linear-gradient(135deg,#1b2431,#51647f)"];
+const DEFBN=HS.map((s,i)=>({l:s.l,t:s.t,g:i,k:s.k=="new"?"new":"c",c:s.c||"",pics:[],on:true}));
+var BN=(()=>{const v=LS("st_banners",null);return Array.isArray(v)?v:DEFBN})();
+function buildHero(){const h=$("#hero");if(!h||!BN)return;const act=D.filter(x=>!x.hid),keep=h.querySelector(".hs"),sl=keep?keep.scrollLeft:0,hasNew=act.some(x=>x.add);
+ const html=BN.map((b,k)=>{if(b.on===false)return"";const L=b.k=="new"?(hasNew?act.filter(x=>x.add):act.slice(-24)):b.k=="c"&&b.c?act.filter(x=>x.c==b.c):act,own=(b.pics||[]).slice(0,3);if(b.k=="c"&&!L.length&&!own.length)return"";
+  let urls;if(own.length)urls=own.map(IMG);else{const w=L.filter(x=>x.i&&x.q>=MINQ),n=w.length;urls=n?[0,1,2].map(j=>w[Math.floor((j+.5)*n/3)]).filter((x,j,a)=>x&&a.indexOf(x)==j).map(x=>String(x.i)):[]}
+  const cnt=b.k=="new"?(hasNew?L.length+" items":"Latest arrivals"):b.k=="c"&&b.c?L.length+" items":"";
+  return`<button class="hsl" type="button" data-k="${k}" style="background:${GR[b.g]||GR[0]}"><small>${esc(b.l||"")}</small><h2>${esc(b.t||"")}</h2><p>${esc(cnt)}</p><span class="go2">Shop now \u203a</span><div class="pics">${urls.map(u=>`<i style="background-image:url('${String(u).replace(/'/g,"%27")}')"></i>`).join("")}</div></button>`}).filter(Boolean);
+ h.innerHTML='<div class="hs">'+html.join("")+'</div><div class="hdots">'+html.map((_,i)=>'<b'+(i?"":' class="on"')+'></b>').join("")+'</div>';
+ const hs=h.querySelector(".hs");if(sl)hs.scrollLeft=sl;
+ hs.addEventListener("scroll",()=>{const i=Math.round(hs.scrollLeft/(hs.clientWidth+10));h.querySelectorAll(".hdots b").forEach((b,j)=>b.classList.toggle("on",j==i))},{passive:true});
+ ["touchstart","pointerdown","wheel"].forEach(ev=>hs.addEventListener(ev,()=>{heroTick=Date.now()},{passive:true}));heroVis()}
+function heroGo(k){const b=BN[k];if(!b)return;if(b.k=="new"){fNew=true;cat="All";$("#cs").value="All"}else if(b.k=="c"&&b.c){fNew=false;cat=b.c;$("#cs").value=b.c}else{fNew=false;cat="All";$("#cs").value="All";flt();$("#g").scrollIntoView({behavior:"smooth"});return}flt();window.scrollTo({top:0})}
+async function loadBanners(){try{const r=await fetch(SBU+"/rest/v1/app_settings?select=value&key=eq.banners",{headers:{apikey:SBK},cache:"no-store"});if(!r.ok)return;const a=await r.json();if(a.length&&Array.isArray(a[0].value)){BN=a[0].value;SS("st_banners",BN)}else{BN=DEFBN;try{localStorage.removeItem("st_banners")}catch(e){}}buildHero();flt()}catch(e){}}
+loadBanners();document.addEventListener("visibilitychange",()=>{if(!document.hidden)loadBanners()});buildHero();flt();
+let BE=null,BPS=-1,BPI=-1;
+const bnMsg=m=>{const e=$("#bnm");if(e)e.textContent=m};
+function catOpts(sel){return'<option value="">No link (just show all items)</option><option value="new"'+(sel=="new"?" selected":"")+'>New Collection</option>'+[...CAT.map(k=>k[0]),"Other Toys"].map(n=>`<option value="c:${esc(n)}"${sel=="c:"+n?" selected":""}>${esc(n)}</option>`).join("")}
+function bnCard(b,i){const link=b.k=="new"?"new":(b.k=="c"&&b.c?"c:"+b.c:"");
+ return`<div class="bn"><div class="bnh"><b>Banner ${i+1}</b><label><input type="checkbox" data-bf="on" data-i="${i}"${b.on!==false?" checked":""}> Show</label><span><button type="button" data-bm="up" data-i="${i}">\u25B2</button><button type="button" data-bm="dn" data-i="${i}">\u25BC</button><button type="button" class="dg" data-bm="del" data-i="${i}">Delete</button></span></div>
+ <label class="fl2">Small text</label><input class="fi" data-bf="l" data-i="${i}" maxlength="40" value="${esc(b.l||"")}">
+ <label class="fl2">Title</label><input class="fi" data-bf="t" data-i="${i}" maxlength="40" value="${esc(b.t||"")}">
+ <label class="fl2">Color</label><div class="sw">${GR.map((g,j)=>`<button type="button" data-bm="col" data-i="${i}" data-j="${j}" class="${b.g==j?"on":""}" style="background:${g}"></button>`).join("")}</div>
+ <label class="fl2">When tapped, show</label><select class="fi" data-bf="link" data-i="${i}">${catOpts(link)}</select>
+ <label class="fl2">Photos in banner (up to 3)</label><div class="bp">${[0,1,2].map(j=>{const pp=(b.pics||[])[j];return`<div class="bpi">${pp?`<i style="background-image:url('${IMG(pp)}')"></i>`:'<i>Auto</i>'}<button type="button" data-bm="pic" data-i="${i}" data-j="${j}">${pp?"Change":"Add"}</button>${pp?`<button type="button" class="dg" data-bm="pdel" data-i="${i}" data-j="${j}">Remove</button>`:""}</div>`}).join("")}</div><p class="am">Without your own photos the banner shows photos of its items automatically.</p></div>`}
+function bnDraw(){adm.innerHTML='<div class="at"><b>Edit Banners</b><span><button id="acancel" class="ab sm ghost" type="button">Close</button></span></div><div class="aw">'+BE.map(bnCard).join("")+'<button id="bnadd" class="ab ghost" type="button">+ Add banner</button><button id="bnsave" class="ab" type="button">Save banners</button><button id="bnreset" class="ab ghost dg" type="button">Reset to default</button><p id="bnm" class="am"></p><input id="bnf" type="file" accept="image/*" hidden></div>'}
+function bnEdit(){BE=JSON.parse(JSON.stringify(BN));bnDraw()}
+adm.addEventListener("input",e=>{const x=e.target;if(!BE||!x.dataset||!x.dataset.bf)return;const f=x.dataset.bf;if(f=="l"||f=="t")BE[+x.dataset.i][f]=x.value});
+adm.addEventListener("change",async e=>{const x=e.target;if(!BE)return;
+ if(x.dataset&&x.dataset.bf){const i=+x.dataset.i;if(x.dataset.bf=="on")BE[i].on=x.checked;else if(x.dataset.bf=="link"){const v=x.value;BE[i].k=v=="new"?"new":v.indexOf("c:")==0?"c":"none";BE[i].c=v.indexOf("c:")==0?v.slice(2):""}return}
+ if(x.id=="bnf"){const f=x.files[0];x.value="";if(!f||BPS<0)return;try{bnMsg("Uploading photo...");const b=await imgBlob(f);delete b._big;const path="bn"+Date.now().toString(36)+".webp";await upload("product-images",path,b);const pics=BE[BPS].pics||(BE[BPS].pics=[]);if(BPI<pics.length){const old=pics[BPI];pics[BPI]=path;if(old)delFile("product-images",old)}else pics.push(path);bnDraw()}catch(err){bnMsg(err.message)}}});
+adm.addEventListener("click",async e=>{const b=e.target.closest("button");if(!b)return;if(b.id=="abn"){bnEdit();return}if(b.id=="acancel"){BE=null;return}if(!BE)return;
+ const i=+b.dataset.i,j=+b.dataset.j,m=b.dataset.bm;
+ if(m=="up"&&i>0){[BE[i-1],BE[i]]=[BE[i],BE[i-1]];bnDraw()}else if(m=="dn"&&i<BE.length-1){[BE[i+1],BE[i]]=[BE[i],BE[i+1]];bnDraw()}
+ else if(m=="del"){if(confirm("Delete this banner?")){(BE[i].pics||[]).forEach(pp=>delFile("product-images",pp));BE.splice(i,1);bnDraw()}}
+ else if(m=="col"){BE[i].g=j;bnDraw()}else if(m=="pic"){BPS=i;BPI=j;$("#bnf").click()}
+ else if(m=="pdel"){const pp=BE[i].pics.splice(j,1)[0];if(pp)delFile("product-images",pp);bnDraw()}
+ else if(b.id=="bnadd"){BE.push({l:"New",t:"New banner",g:0,k:"none",c:"",pics:[],on:true});bnDraw();adm.scrollTop=adm.scrollHeight}
+ else if(b.id=="bnsave"){b.disabled=true;bnMsg("Saving...");try{const t=await tok(),val=BE.map(x=>({l:String(x.l||"").slice(0,40),t:String(x.t||"").slice(0,40),g:+x.g||0,k:x.k||"none",c:x.c||"",pics:(x.pics||[]).slice(0,3),on:x.on!==false})),r=await fetch(SBU+"/rest/v1/app_settings?on_conflict=key",{method:"POST",headers:AH(t),body:JSON.stringify([{key:"banners",value:val,updated_at:new Date().toISOString()}])});if(!r.ok)throw new Error(/relation|app_settings|schema cache/i.test(await r.clone().text())?"Server not ready. Run banners_setup.sql in Supabase":"Save failed ("+r.status+")"+(r.status==401||r.status==403?" - login again":""));
+   BN=val;SS("st_banners",BN);buildHero();flt();toast("Banners saved");BE=null;admView()}catch(err){b.disabled=false;bnMsg(err.message);if(/login/i.test(err.message))admLogin(err.message)}}
+ else if(b.id=="bnreset"){if(!confirm("Reset all banners to the default ones?"))return;try{const t=await tok(),r=await fetch(SBU+"/rest/v1/app_settings?key=eq.banners",{method:"DELETE",headers:{apikey:SBK,Authorization:"Bearer "+t}});if(!r.ok)throw new Error("Reset failed ("+r.status+")");BE.forEach(x=>(x.pics||[]).forEach(pp=>delFile("product-images",pp)));BN=DEFBN;try{localStorage.removeItem("st_banners")}catch(e){}buildHero();flt();toast("Banners reset");BE=null;admView()}catch(err){bnMsg(err.message)}}});
 
 if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
 </script></body></html>
