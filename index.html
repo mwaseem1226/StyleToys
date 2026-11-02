@@ -507,7 +507,7 @@ nav.addEventListener("click",e=>{const b=e.target.closest("[data-t]");if(!b)retu
  else{favOn=(k=="fav");if(favOn&&!FAV.length)toast("Tap the heart on any item to add it to Favourites");favUI();flt();window.scrollTo({top:0})}
  syncTab()});
 document.addEventListener("click",()=>setTimeout(syncTab,60),true);syncTab();
-const PB='<div class="pb"><small>POWERED BY</small><b>Muhammad Waseem</b><div class="ver">App version 2026.11.06</div></div>';
+const PB='<div class="pb"><small>POWERED BY</small><b>Muhammad Waseem</b><div class="ver">App version 2026.11.08</div></div>';
 const hdr=(t,b)=>'<div class="at"><button class="ab sm ghost" data-go="'+(b||"home")+'">\u2039 Back</button><b>'+t+'</b><span style="width:64px"></span></div>';
 function moreHome(){more.innerHTML='<div class="at"><b>More</b></div><div class="aw"><div class="ml">'+(S?'<button class="mr" data-go="cust" type="button"><span>Saved Customers</span><i>\u203a</i></button>':'')+'<button class="mr" data-go="adm" type="button"><span>Admin'+(S?'<small>Logged in \u00b7 stock update</small>':'')+'</span><i>\u203a</i></button><button class="mr" data-go="about" type="button"><span>About</span><i>\u203a</i></button></div>'+PB+'</div>'}
 function moreAbout(){more.innerHTML=hdr("About")+'<div class="aw abt"><div class="sl2"></div><h2>Style Toys</h2>'+PB+'</div>'}
@@ -677,7 +677,7 @@ const AH=t=>({apikey:SBK,Authorization:"Bearer "+t,"Content-Type":"application/j
 async function readSheet(f){const nm=f.name.toLowerCase();if(/\.xls[xm]$/.test(nm))return xlsxRows(await f.arrayBuffer());if(/\.xls$/.test(nm))throw new Error("Old .xls not supported. Save as .xlsx or .csv");return csvParse((await f.text()).replace(/^\uFEFF/,""))}
 /* ---- admin view (override) ---- */
 let showDel=false,PHN=null,BA=null;
-function admView(){adm.innerHTML='<div class="at"><b>Stock Update</b><span><button id="alo" class="ab sm ghost" type="button">Logout</button><button id="ax" class="ab sm ghost" type="button">Close</button></span></div><div class="aw"><div class="bk"><button id="aadd" class="ab" type="button">+ Add new product</button><button id="abadd" class="ab" type="button">Bulk add products (Excel / CSV)</button><button id="abp" class="ab" type="button">Bulk upload photos (ZIP file)</button><button id="abn" class="ab" type="button">Edit home banners</button><button id="abk" class="ab" type="button">Bulk update Stock &amp; Price (CSV / Excel)</button><button id="adl" class="ab ghost" type="button">Download stock &amp; price (CSV)</button>'
+function admView(){adm.innerHTML='<div class="at"><b>Stock Update</b><span><button id="alo" class="ab sm ghost" type="button">Logout</button><button id="ax" class="ab sm ghost" type="button">Close</button></span></div><div class="aw"><div class="bk"><button id="aadd" class="ab" type="button">+ Add new product</button><button id="abadd" class="ab" type="button">Bulk add products (Excel / CSV)</button><button id="abp" class="ab" type="button">Bulk upload photos (ZIP file)</button><button id="abn" class="ab" type="button">Edit home banners</button><button id="aav" class="ab" type="button">Available items PDF (share on WhatsApp)</button><button id="abk" class="ab" type="button">Bulk update Stock &amp; Price (CSV / Excel)</button><button id="adl" class="ab ghost" type="button">Download stock &amp; price (CSV)</button>'
  +'<input id="afile" type="file" accept=".csv,.txt,.xlsx,.xlsm,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" hidden><input id="afile2" type="file" accept=".csv,.txt,.xlsx,.xlsm,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" hidden><input id="aph" type="file" accept="image/*" hidden><input id="aphm" type="file" accept=".zip,application/zip,application/x-zip-compressed" hidden></div>'
  +'<input id="as" type="search" placeholder="Search item no. or name"><label class="ak"><input id="af" type="checkbox"> Out of stock only (below '+MINQ+')</label><label class="ak"><input id="ah" type="checkbox"> Show deleted items</label><div id="alist"></div></div>';drawList()}
 function drawList(){const t=$("#as").value.trim().toLowerCase(),o=$("#af").checked,sd=$("#ah")&&$("#ah").checked;let n=0,h="";
@@ -879,7 +879,7 @@ setInterval(()=>{const h=$("#hero");if(!h||h.hidden||document.hidden||document.g
 buildHero();flt();
 
 /* ===== Update app (manual button + automatic new-version notice) ===== */
-const APPVER="2026.11.06";
+const APPVER="2026.11.08";
 async function refreshApp(){toast("Updating...");try{const rs=await navigator.serviceWorker.getRegistrations();await Promise.all(rs.map(r=>r.unregister()));const ks=await caches.keys();await Promise.all(ks.map(k=>caches.delete(k)))}catch(e){}
  const u=new URL(location.href);u.searchParams.set("u",Date.now());location.replace(u.toString())}
 function moreHome(){more.innerHTML='<div class="at"><b>More</b></div><div class="aw"><div class="ml">'+(S?'<button class="mr" data-go="cust" type="button"><span>Saved Customers</span><i>\u203a</i></button>':'')+'<button class="mr" data-go="adm" type="button"><span>Admin'+(S?'<small>Logged in \u00b7 stock update</small>':'')+'</span><i>\u203a</i></button><button class="mr" data-go="about" type="button"><span>About</span><i>\u203a</i></button><button class="mr" data-go="upd" type="button"><span>Update app<small>Get the latest version</small></span><i>\u203a</i></button></div>'+PB+'</div>';const vv=more.querySelector(".ver");if(vv)vv.innerHTML+="<br>"+esc(location.host+location.pathname)+(window.__srv?"<br>Latest on server: "+esc(window.__srv):"")}
@@ -889,22 +889,24 @@ async function chkUpd(){try{const r=await fetch("version.json?t="+Date.now(),{ca
 setTimeout(chkUpd,8000);document.addEventListener("visibilitychange",()=>{if(!document.hidden)chkUpd()});
 
 /* ===== Exit confirmation (installed app) ===== */
-const isApp=()=>!!window.__forceApp||matchMedia("(display-mode: standalone)").matches||matchMedia("(display-mode: fullscreen)").matches||matchMedia("(display-mode: minimal-ui)").matches||navigator.standalone===true||document.referrer.indexOf("android-app://")==0;
+const isApp=()=>{if(window.__forceApp)return true;let a=matchMedia("(display-mode: standalone)").matches||matchMedia("(display-mode: fullscreen)").matches||matchMedia("(display-mode: minimal-ui)").matches||navigator.standalone===true||document.referrer.indexOf("android-app://")==0;try{if(a)sessionStorage.setItem("st_app","1");else a=sessionStorage.getItem("st_app")=="1"}catch(e){}return a};
 let exiting=false;
 const xd=document.createElement("div");xd.id="xd";xd.hidden=true;xd.innerHTML='<div class="xb"><h3>Exit Style Toys?</h3><p>Are you sure you want to exit?</p><div><button id="xno" type="button">No</button><button id="xyes" type="button">Yes, exit</button></div></div>';document.body.appendChild(xd);
-const guard=()=>{try{if(!(history.state&&history.state.sg))history.pushState({sg:1},"")}catch(e){}};
+const gpush=()=>{try{history.pushState({sg:1},"")}catch(e){}};
 function anyOpen(){return!$("#lb").hidden||!$("#pd").hidden||!$("#m").hidden||!$("#flt").hidden||!adm.hidden||!more.hidden||!ov.hidden||($("#vid")&&!$("#vid").hidden)}
+function onBack(){if(exiting)return;
+ if(!xd.hidden){xd.hidden=true;return}
+ if(!$("#lb").hidden){lbClose();return}
+ if(anyOpen()){closeAll();syncTab();return}
+ if(favOn){favOn=false;favUI();flt();syncTab();return}
+ xd.hidden=false}
 if(isApp()){try{history.replaceState({sr:1},"")}catch(e){}
- /* Chrome ignores history entries added before the first touch, so the guard entry is added on the first user touch (and again whenever missing) */
- ["pointerdown","touchstart","click","keydown"].forEach(ev=>addEventListener(ev,()=>{if(!exiting&&history.state&&history.state.sr)guard()},{capture:true,passive:true}));
- window.addEventListener("popstate",e=>{if(exiting)return;if(!(e.state&&e.state.sr))return;
-  if(!xd.hidden){xd.hidden=true;guard();return}
-  if(!$("#lb").hidden){lbClose();guard();return}
-  if(anyOpen()){closeAll();syncTab();guard();return}
-  if(favOn){favOn=false;favUI();flt();syncTab();guard();return}
-  xd.hidden=false;guard()});
- $("#xno").onclick=()=>{xd.hidden=true;guard()};
- $("#xyes").onclick=()=>{exiting=true;xd.hidden=true;try{history.back()}catch(e){}setTimeout(()=>{try{window.close()}catch(e){}},150);setTimeout(()=>{toast("Press back once more to exit")},900)}}
+ /* guard entries are added after a real tap (Chrome ignores entries added before any touch); two are kept so one is always left */
+ const arm=()=>{if(exiting)return;if(history.state&&history.state.sr){gpush();gpush()}};
+ ["click","touchend","pointerup","keydown"].forEach(ev=>addEventListener(ev,arm,{capture:true,passive:true}));
+ window.addEventListener("popstate",()=>{if(exiting)return;onBack();gpush();if(history.state&&history.state.sr)gpush()});
+ $("#xno").onclick=()=>{xd.hidden=true};
+ $("#xyes").onclick=()=>{exiting=true;xd.hidden=true;let n=0;try{if(window.navigation&&navigation.currentEntry)n=navigation.currentEntry.index}catch(e){}try{if(n>0)history.go(-n)}catch(e){}setTimeout(()=>{try{window.close()}catch(e){}},200);setTimeout(()=>{toast("Press back once more to exit")},1000)}}
 /* ===== Editable home banners ===== */
 const GR=["linear-gradient(135deg,#0b5d68,#14909e 55%,#6fd0db)","linear-gradient(135deg,#7a1f2b,#d1344f)","linear-gradient(135deg,#17356b,#4a86e8)","linear-gradient(135deg,#a85400,#f2a33a)","linear-gradient(135deg,#6d2480,#d36bbf)","linear-gradient(135deg,#523317,#b8844a)","linear-gradient(135deg,#17653f,#59c58a)","linear-gradient(135deg,#1b2431,#51647f)"];
 const DEFBN=HS.map((s,i)=>({l:s.l,t:s.t,g:i,k:s.k=="new"?"new":"c",c:s.c||"",pics:[],on:true}));
@@ -947,6 +949,48 @@ adm.addEventListener("click",async e=>{const b=e.target.closest("button");if(!b)
  else if(b.id=="bnsave"){b.disabled=true;bnMsg("Saving...");try{const t=await tok(),val=BE.map(x=>({l:String(x.l||"").slice(0,40),t:String(x.t||"").slice(0,40),g:+x.g||0,k:x.k||"none",c:x.c||"",pics:(x.pics||[]).slice(0,3),on:x.on!==false})),r=await fetch(SBU+"/rest/v1/app_settings?on_conflict=key",{method:"POST",headers:AH(t),body:JSON.stringify([{key:"banners",value:val,updated_at:new Date().toISOString()}])});if(!r.ok)throw new Error(/relation|app_settings|schema cache/i.test(await r.clone().text())?"Server not ready. Run banners_setup.sql in Supabase":"Save failed ("+r.status+")"+(r.status==401||r.status==403?" - login again":""));
    BN=val;SS("st_banners",BN);buildHero();flt();toast("Banners saved");BE=null;admView()}catch(err){b.disabled=false;bnMsg(err.message);if(/login/i.test(err.message))admLogin(err.message)}}
  else if(b.id=="bnreset"){if(!confirm("Reset all banners to the default ones?"))return;try{const t=await tok(),r=await fetch(SBU+"/rest/v1/app_settings?key=eq.banners",{method:"DELETE",headers:{apikey:SBK,Authorization:"Bearer "+t}});if(!r.ok)throw new Error("Reset failed ("+r.status+")");BE.forEach(x=>(x.pics||[]).forEach(pp=>delFile("product-images",pp)));BN=DEFBN;try{localStorage.removeItem("st_banners")}catch(e){}buildHero();flt();toast("Banners reset");BE=null;admView()}catch(err){bnMsg(err.message)}}});
+
+/* ===== Available items PDF (same layout as the Excel print-out) ===== */
+let AVB=null;
+const avItems=()=>D.filter(x=>!x.hid&&x.q>=MINQ&&x.p);
+async function avJpeg(x){const src=x.i;if(!src)return null;try{const im=new Image();if(!/^data:/.test(src))im.crossOrigin="anonymous";im.src=src;await im.decode();
+ const s=Math.min(1,420/Math.max(im.naturalWidth,im.naturalHeight)),w=Math.max(1,Math.round(im.naturalWidth*s)),h=Math.max(1,Math.round(im.naturalHeight*s)),c=document.createElement("canvas");c.width=w;c.height=h;const g=c.getContext("2d");g.fillStyle="#fff";g.fillRect(0,0,w,h);g.drawImage(im,0,0,w,h);
+ const b=await new Promise(r=>c.toBlob(r,"image/jpeg",.82));if(!b)return null;return{u8:new Uint8Array(await b.arrayBuffer()),w,h}}catch(e){return null}}
+function avPdf(items,imgs){const W=841.92,H=1190.52,X=[18,248.4,437.8,735.9,775.4],Y0=54,HH=32.6,GAP=18.9,RH=193.6,PER=5,f=n=>n.toFixed(2);
+ const parts=[],offs=[];let len=0;const bytes=s=>{const u=new Uint8Array(s.length);for(let i=0;i<s.length;i++)u[i]=s.charCodeAt(i)&255;return u},put=u=>{if(typeof u=="string")u=bytes(u);parts.push(u);len+=u.length},obj=(n,fn)=>{offs[n]=len;put(n+" 0 obj\n");fn();put("\nendobj\n")};
+ put("%PDF-1.4\n%\xE2\xE3\xCF\xD3\n");obj(3,()=>put("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>"));obj(4,()=>put("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>"));
+ let next=5;const imgNo={};items.forEach((x,i)=>{const im=imgs[i];if(!im)return;imgNo[i]=next;obj(next,()=>{put(`<< /Type /XObject /Subtype /Image /Width ${im.w} /Height ${im.h} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${im.u8.length} >>\nstream\n`);put(im.u8);put("\nendstream")});next++});
+ const np=Math.max(1,Math.ceil(items.length/PER)),kids=[];
+ for(let pg=0;pg<np;pg++){const c=[],K=s=>c.push(s),Yb=yt=>H-yt,esc=s=>pc(s).replace(/[\\()]/g,"\\$&"),
+  T=(x,yt,s,z,b)=>K(`BT /F${b?2:1} ${z} Tf ${f(x)} ${f(Yb(yt))} Td (${esc(s)}) Tj ET`),
+  rows=items.slice(pg*PER,pg*PER+PER),bottom=Y0+HH+GAP+rows.length*RH,used=[];
+  K("0 0 0 RG 1 w");
+  const hl=yt=>K(`${f(X[0])} ${f(Yb(yt))} m ${f(X[4])} ${f(Yb(yt))} l S`);hl(Y0);hl(Y0+HH);hl(Y0+HH+GAP);for(let r=1;r<=rows.length;r++)hl(Y0+HH+GAP+r*RH);
+  X.forEach(x=>K(`${f(x)} ${f(Yb(Y0))} m ${f(x)} ${f(Yb(bottom))} l S`));
+  K("0 0 0 rg");["Pic","Item","Description","Price"].forEach((h,i)=>{const cx=(X[i]+X[i+1])/2;T(cx-tw(h,14,1)/2,Y0+HH/2+5,h,14,1)});
+  rows.forEach((x,r)=>{const idx=pg*PER+r,top=Y0+HH+GAP+r*RH,mid=top+RH/2;
+   let z=20;while(tw(x.n,z)>X[2]-X[1]-8&&z>8)z--;T(X[1]+3.6,mid+z*.35,x.n,z,0);
+   const L=wrap(x.d,X[3]-X[2]-8,11).slice(0,4),y0=mid-(L.length*13)/2+10;L.forEach((s,k)=>T(X[2]+2.4,y0+k*13,s,11,0));
+   T(X[3]+9.4,mid+4,String(x.p),11,0);
+   const im=imgs[idx];if(im){const mw=X[1]-X[0]-6,mh=RH-8,s=Math.min(mw/im.w,mh/im.h),w=im.w*s,h=im.h*s,ix=X[0]+(X[1]-X[0]-w)/2,iy=mid-h/2;K(`q ${f(w)} 0 0 ${f(h)} ${f(ix)} ${f(Yb(iy+h))} cm /Im${imgNo[idx]} Do Q`);used.push(imgNo[idx])}});
+  const cn=next++,pn=next++,cs=c.join("\n"),cb=bytes(cs);
+  obj(cn,()=>{put(`<< /Length ${cb.length} >>\nstream\n`);put(cb);put("\nendstream")});
+  obj(pn,()=>put(`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${W} ${H}] /Resources << /Font << /F1 3 0 R /F2 4 0 R >>${used.length?" /XObject << "+used.map(n=>"/Im"+n+" "+n+" 0 R").join(" ")+" >>":""} >> /Contents ${cn} 0 R >>`));kids.push(pn)}
+ obj(2,()=>put(`<< /Type /Pages /Kids [${kids.map(k=>k+" 0 R").join(" ")}] /Count ${np} >>`));obj(1,()=>put("<< /Type /Catalog /Pages 2 0 R >>"));
+ const xr=len;put(`xref\n0 ${next}\n0000000000 65535 f \n`);for(let n=1;n<next;n++)put(String(offs[n]).padStart(10,"0")+" 00000 n \n");put(`trailer\n<< /Size ${next} /Root 1 0 R >>\nstartxref\n${xr}\n%%EOF`);
+ return new Blob(parts,{type:"application/pdf"})}
+function showAv(){const n=avItems().length;AVB=null;adm.innerHTML='<div class="at"><b>Available Items PDF</b><span><button id="acancel" class="ab sm ghost" type="button">Close</button></span></div><div class="aw"><div class="bs"><div class="bl"><span>Items available in the app now</span><b class="ok">'+n+'</b></div></div><p class="am">Items that are in stock (not Out of Stock) and have a price. Photo, Item, Description and Price, same as your Excel print-out.</p><button id="avgo" class="ab" type="button">Create PDF</button><p id="avp" class="am"></p><div id="avr"></div></div>'}
+async function avRun(b){const items=avItems(),pr=$("#avp");if(!items.length){pr.textContent="No available items";return}b.disabled=true;const imgs=new Array(items.length);let done=0,k=0;
+ try{const work=async()=>{while(k<items.length){const i=k++;imgs[i]=await avJpeg(items[i]);done++;if(done%10==0||done==items.length)pr.textContent="Preparing photos "+done+" / "+items.length}};await Promise.all([work(),work(),work(),work(),work(),work()]);
+  pr.textContent="Building PDF...";await new Promise(r=>setTimeout(r,30));const blob=avPdf(items,imgs),d=new Date(),p2=n=>String(n).padStart(2,"0"),name=`Style_Toys_Available_Items_${p2(d.getDate())}-${p2(d.getMonth()+1)}-${String(d.getFullYear()).slice(2)}.pdf`;
+  AVB={blob,name,n:items.length,pages:Math.ceil(items.length/5)};pr.textContent="";
+  $("#avr").innerHTML='<div class="bs"><div class="bl"><span>File</span><b style="font-size:12px">'+esc(name)+'</b></div><div class="bl"><span>Pages</span><b>'+AVB.pages+'</b></div><div class="bl"><span>Size</span><b>'+(blob.size/1048576).toFixed(1)+' MB</b></div></div><button id="avsh" class="ab" type="button">Share on WhatsApp</button><button id="avdl" class="ab ghost" type="button">Download PDF</button>';b.textContent="Create again";b.disabled=false}
+ catch(err){b.disabled=false;pr.textContent="Could not create PDF: "+((err&&err.message)||err)}}
+function avDownload(){if(!AVB)return;const u=URL.createObjectURL(AVB.blob),a=document.createElement("a");a.href=u;a.download=AVB.name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),60000)}
+async function avShare(){if(!AVB)return;let f=null;try{f=new File([AVB.blob],AVB.name,{type:"application/pdf"})}catch(e){}
+ if(f&&navigator.share&&navigator.canShare){let can=false;try{can=navigator.canShare({files:[f]})}catch(e){}if(can){for(const o of[{files:[f],title:"Style Toys - Available Items",text:"Style Toys available items list"},{files:[f]}]){try{await navigator.share(o);return}catch(e){if(e&&e.name=="AbortError")return}}}}
+ avDownload();toast("PDF saved. Open WhatsApp and attach it");const a=document.createElement("a");a.href="https://wa.me/?text="+encodeURIComponent("Style Toys available items list");a.target="_blank";a.rel="noopener";document.body.appendChild(a);setTimeout(()=>{a.click();a.remove()},500)}
+adm.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;if(b.id=="aav")showAv();else if(b.id=="avgo")avRun(b);else if(b.id=="avsh")avShare();else if(b.id=="avdl")avDownload()});
 
 if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
 </script></body></html>
